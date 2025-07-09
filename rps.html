@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-6">
+  
+  <h1 class="text-4xl font-bold text-gray-800 mb-7">Rock Paper Scissors </h1>
+ <div class="flex space-x-8">
+    <!-- Rock -->
+    <button id="rock" class="text-6xl p-6 bg-white rounded-full shadow hover:bg-gray-200 transition transform hover:scale-110 btn" title="Rock" onclick="play('Rock')">
+      ✊
+    </button>
+    <!-- Paper -->
+    <button id="paper" class="text-6xl p-6 bg-white rounded-full shadow hover:bg-gray-200 transition transform hover:scale-110 btn" title="Paper" onclick="play('Paper')">
+      ✋
+    </button>
+    <!-- Scissors -->
+    <button id="scissors" class="text-6xl p-6 bg-white rounded-full shadow hover:bg-gray-200 transition transform hover:scale-110 btn" title="Scissors" onclick="play('Scissors')">
+      ✌️
+    </button>
+  </div>
+<!-- Moves Section -->
+<div class="mt-10 text-center space-y-4">
+  <h1 class="text-2xl font-semibold text-gray-700">👤 Player Move: <span class="font-mono text-3xl" id="playerMove">✋</span></h1>
+  <h1 class="text-2xl font-semibold text-gray-700">🤖 Computer Move: <span class="font-mono text-3xl" id="compMove">✌️</span></h1>
+</div>
+
+<!-- Hidden screen -->
+<p  id="hiddenText"class="hidden text-center text-red-600 font-bold mt-4">hidden screen</p>
+
+<!-- Score Section -->
+<div class="mt-10 flex justify-center gap-16 text-lg font-medium text-gray-800">
+  <h3 id="userScore"class="bg-white px-6 py-3 rounded-xl shadow">🎮 Player Score: <span id="playerScore">0</span></h3>
+  <h3 id="compScore" class="bg-white px-6 py-3 rounded-xl shadow">🧠 Computer Score: <span id="cpuScore">0</span></h3>
+</div>
+ <p id="result" class="text-2xl font-bold text-center mt-4 text-blue-600"> </p>
+<script>
+  let cnt_player=0,cnt_comp=0,result="",cnt=0,m1="";
+  function play(move){
+    let gesture = {
+      Rock: "✊",
+      Paper: "✋",
+      Scissors: "✌️"
+    };
+    m1=document.getElementById("playerMove").innerText = gesture[move];
+    const moves=["✊","✋","✌️"];
+    let idx=Math.floor(Math.random()*3);
+    let m2=document.getElementById("compMove").innerText=moves[idx];
+    if(m1===m2){
+      result="It's draw";
+    }
+    else{
+      switch(m1){
+        case "✊":
+          if(m2==="✌️"){
+            result="you win";
+            cnt_player++;
+          }
+          else{
+            result="you lose";
+            cnt_comp++;
+          }
+        break;
+          case "✋":
+          if(m2==="✊"){
+            result="you win";
+            cnt_player++;
+          }
+          else{
+            result="you lose";
+            cnt_comp++;
+          }
+        break;
+        case "✌️":
+          if(m2==="✋"){
+            result="you win";
+            cnt_player++;
+          }
+          else{
+            result="you lose";
+            cnt_comp++;
+          }
+        break;
+      }
+    }
+     document.getElementById("playerScore").innerText=cnt_player;
+     document.getElementById("cpuScore").innerText=cnt_comp;
+    document.getElementById("result").innerText=result;
+      cnt++;
+     if(cnt==10)reset();
+   
+  }
+  function reset(){
+     m1="";
+   cnt_player=0,cnt_comp=0;
+  }
+</script>
+</body>
+</html>
